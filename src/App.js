@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Content from "./Content";
 
 class App extends React.Component {
   state = {
@@ -12,15 +13,20 @@ class App extends React.Component {
        placeholder="인원 수를 입력하세요(자신 포함)"
        onKeyPress={this.handleInputKeyPress}
        ></Input>
+       <Content />
     </Container>
     );
   }
 
   handleInputKeyPress = event => {
+    const {
+      target: { value }
+    } = event;
     if (event.key === "Enter") {
       this.setState({
-        query: event.target.value
+        query : value
       });
+      localStorage.setItem("player_num", this.state.query);
       event.target.value = "";
     }
   };
